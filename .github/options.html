@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Transcript Fetcher Settings</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background: white;
+      margin: 40px 20px;
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    p.subtitle {
+      color: #666;
+      margin-bottom: 32px;
+      font-size: 14px;
+    }
+
+    .section {
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .section:last-child {
+      border-bottom: none;
+    }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #333;
+    }
+
+    .option-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .radio-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .radio-label:hover {
+      background: #f5f5f5;
+      border-color: #ddd;
+    }
+
+    .radio-label input[type="radio"] {
+      margin: 0;
+      width: 18px;
+      height: 18px;
+      accent-color: #667eea;
+    }
+
+    .radio-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .radio-title {
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .radio-desc {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .save-status {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 12px 24px;
+      background: #333;
+      color: white;
+      border-radius: 8px;
+      font-size: 14px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s;
+    }
+
+    .save-status.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Dark mode preview */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #1a1a1a;
+        color: #f1f1f1;
+      }
+
+      .container {
+        background: #212121;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+      }
+
+      h1,
+      h2 {
+        color: #f1f1f1;
+      }
+
+      p.subtitle,
+      .radio-desc {
+        color: #aaa;
+      }
+
+      .section {
+        border-color: #333;
+      }
+
+      .radio-label {
+        border-color: #333;
+      }
+
+      .radio-label:hover {
+        background: #2a2a2a;
+        border-color: #444;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="settings-container" class="container">
+    <h1>Settings</h1>
+    <p class="subtitle">Configure how YouTube Transcript Fetcher works</p>
+
+    <div class="section">
+      <h2>Button Position</h2>
+      <div class="option-group">
+        <label class="radio-label">
+          <input type="radio" name="buttonPosition" value="embedded" checked>
+          <div class="radio-content">
+            <span class="radio-title">Embedded in YouTube Interface</span>
+            <span class="radio-desc">Adds a button next to other YouTube actions (Like, Share, etc.)</span>
+          </div>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="buttonPosition" value="floating">
+          <div class="radio-content">
+            <span class="radio-title">Floating Button</span>
+            <span class="radio-desc">Shows a floating button on the right side of the screen</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Default Tab</h2>
+      <div class="option-group">
+        <label class="radio-label">
+          <input type="radio" name="defaultTab" value="transcript" checked>
+          <div class="radio-content">
+            <span class="radio-title">Transcript</span>
+            <span class="radio-desc">Show the transcript view by default</span>
+          </div>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="defaultTab" value="chat">
+          <div class="radio-content">
+            <span class="radio-title">AI Chat</span>
+            <span class="radio-desc">Open directly to the AI chat interface</span>
+          </div>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="defaultTab" value="analyze">
+          <div class="radio-content">
+            <span class="radio-title">Analysis</span>
+            <span class="radio-desc">Show the analysis tools by default</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Theme</h2>
+      <div class="option-group">
+        <label class="radio-label">
+          <input type="radio" name="theme" value="system" checked>
+          <div class="radio-content">
+            <span class="radio-title">System Default</span>
+            <span class="radio-desc">Follow your system or YouTube's theme</span>
+          </div>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="theme" value="light">
+          <div class="radio-content">
+            <span class="radio-title">Light Mode</span>
+            <span class="radio-desc">Always use light theme</span>
+          </div>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="theme" value="dark">
+          <div class="radio-content">
+            <span class="radio-title">Dark Mode</span>
+            <span class="radio-desc">Always use dark theme</span>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div id="app-container" style="display: none; height: 100vh; padding: 20px; box-sizing: border-box;">
+    <!-- App content will be injected here -->
+  </div>
+
+  <div id="save-status" class="save-status">Settings saved</div>
+
+  <script src="options.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
